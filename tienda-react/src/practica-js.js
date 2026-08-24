@@ -77,3 +77,5 @@ const NombreCompleto = (a,b) =>{
     return NombreCompleto
 }
 console.log(NombreCompleto("Juan","Perez"));*/
+
+
