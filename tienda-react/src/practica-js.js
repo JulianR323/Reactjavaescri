@@ -95,7 +95,7 @@ const productos = [
 /*
 productos.forEach((producto, indice) => {
  console.log(`${indice + 1}. ${producto.nombre} -stock:${producto.stock}`);
-});*/
+});
 
 const nombres = productos.map(producto => producto.nombre);
 console.log(nombres);
@@ -107,6 +107,24 @@ const nombresMayuscula = productos.map(producto => producto.nombre.toUpperCase()
 console.log(nombresMayuscula);
 
 const resumenProductos = productos.map(producto => `${producto.nombre} cuesta $${producto.precio}`);
-console.log(resumenProductos);
+console.log(resumenProductos);*/
+const disponibles = productos.filter(producto => producto.stock > 0);
+const producto3 = productos.find(producto => producto.id === 3);
+
+const mayoresA100k = productos.filter(producto => producto.precio > 100000);
+console.log(mayoresA100k);
+
+const entre50kY200k = productos.filter(producto => producto.precio >= 50000 && producto.precio <= 200000);
+console.log(entre50kY200k);
+
+const tecnologia = productos.filter(producto => producto.categoria === "Perifericos");
+console.log(tecnologia);
+
+const producto5 = productos.find(producto => producto.id === 5);
+console.log(producto5);
+
+const buscarProducto = (id) => productos.find(producto => producto.id === id);
+
+console.log(buscarProducto(5));
 
 
