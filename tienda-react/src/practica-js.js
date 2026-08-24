@@ -76,7 +76,7 @@ const NombreCompleto = (a,b) =>{
     const NombreCompleto = a + " " + b
     return NombreCompleto
 }
-console.log(NombreCompleto("Juan","Perez"));*/
+console.log(NombreCompleto("Juan","Perez"));
 
 
 const productos = [
@@ -91,4 +91,8 @@ const productos = [
     { id: 9, nombre: 'Ventilador', precio: 20000, categoria: 'Electrodomesticos', stock: 5 },
     { id: 10, nombre: 'Camara', precio: 120000, categoria: 'Perifericos', stock: 1 },
 ];
-console.log(productos);
+
+
+productos.forEach((producto, indice) => {
+ console.log(`${indice + 1}. ${producto.nombre} -stock:${producto.stock}`);
+});*/
