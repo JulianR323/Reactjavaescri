@@ -76,7 +76,7 @@ const NombreCompleto = (a,b) =>{
     const NombreCompleto = a + " " + b
     return NombreCompleto
 }
-console.log(NombreCompleto("Juan","Perez"));
+console.log(NombreCompleto("Juan","Perez"));*/
 
 
 const productos = [
@@ -92,7 +92,21 @@ const productos = [
     { id: 10, nombre: 'Camara', precio: 120000, categoria: 'Perifericos', stock: 1 },
 ];
 
-
+/*
 productos.forEach((producto, indice) => {
  console.log(`${indice + 1}. ${producto.nombre} -stock:${producto.stock}`);
 });*/
+
+const nombres = productos.map(producto => producto.nombre);
+console.log(nombres);
+
+const preciosConIva = productos.map(producto => producto.precio * 1.19);
+console.log(preciosConIva);
+
+const nombresMayuscula = productos.map(producto => producto.nombre.toUpperCase());
+console.log(nombresMayuscula);
+
+const resumenProductos = productos.map(producto => `${producto.nombre} cuesta $${producto.precio}`);
+console.log(resumenProductos);
+
+
