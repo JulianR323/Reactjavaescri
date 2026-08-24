@@ -48,5 +48,32 @@ const aplicarIva = (precio) => {
 return precio * 1.19;
 };
 
-Acortada con funcion tipo flecha*/
+Acortada con funcion tipo flech
 const aplicarIva = precio => precio * 1.19;
+
+
+
+
+const cuadrado = (a,b) =>{
+    const resultado = a ** b;
+    return resultado
+};  
+console.log(cuadrado(8,2));*/
+
+
+
+/*
+const esMayorEdad = (a) =>{
+    if (a >= 18){
+        return("Mayor de edad");
+    }else{
+        return("Menor de edad");
+    }
+}
+console.log("Usted es:", esMayorEdad(16));
+
+const NombreCompleto = (a,b) =>{
+    const NombreCompleto = a + " " + b
+    return NombreCompleto
+}
+console.log(NombreCompleto("Juan","Perez"));*/
