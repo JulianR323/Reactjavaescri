@@ -107,7 +107,7 @@ const nombresMayuscula = productos.map(producto => producto.nombre.toUpperCase()
 console.log(nombresMayuscula);
 
 const resumenProductos = productos.map(producto => `${producto.nombre} cuesta $${producto.precio}`);
-console.log(resumenProductos);*/
+console.log(resumenProductos);
 const disponibles = productos.filter(producto => producto.stock > 0);
 const producto3 = productos.find(producto => producto.id === 3);
 
@@ -127,4 +127,48 @@ const buscarProducto = (id) => productos.find(producto => producto.id === id);
 
 console.log(buscarProducto(5));
 
+const hayAgotados = productos.some(producto => producto.stock === 0);
+const preciosValidos = productos.every(producto => producto.precio > 0);
+const valorInventario = productos.reduce(
+ (total, producto) => total + producto.precio * producto.stock,
+ 0
+);
 
+const hayAgotados = productos.some(producto => producto.stock === 0);
+console.log("¿Hay productos agotados?:", hayAgotados);
+
+const hayPrecioMayorA1M = productos.some(producto => producto.precio > 1000000);
+console.log("¿Hay alguno mayor a $1M?:", hayPrecioMayorA1M);
+
+const preciosValidos = productos.every(producto => producto.precio > 0);
+console.log("¿Todos tienen precio > 0?:", preciosValidos);
+
+const stocksValidos = productos.every(producto => producto.stock >= 0);
+console.log("¿Todos tienen stock >= 0?:", stocksValidos);
+
+const valorInventario = productos.reduce(
+  (total, producto) => total + (producto.precio * producto.stock),
+  0
+);
+console.log("Valor total del inventario: $", valorInventario);
+
+console.log(`El producto ${productos[0].nombre} cuesta $${productos[0].precio}`);
+const { nombre, precio, stock } = productos[0];
+console.log(nombre, precio, stock);
+
+const productoActualizado = {
+ ...productos[0],
+ stock: 8
+};
+
+const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
+console.log(estado);*/
+
+const productoEditado = {
+  ...productos[0],
+  precio: 75000, 
+  stock: 0
+};
+const { nombre, precio, stock } = productoEditado;
+const estado = stock > 0 ? 'Disponible' : 'Agotado';
+console.log(`El producto ${nombre} ahora cuesta $${precio} y su estado es: ${estado}.`);
