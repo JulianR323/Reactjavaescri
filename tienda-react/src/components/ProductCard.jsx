@@ -1,6 +1,7 @@
-function ProductoCard({ producto }) {
+function ProductCard({ producto }) {
   const { nombre, precio, categoria, stock } = producto;
   const estado = stock > 0 ? "Disponible" : "Agotado";
+  const formatearPrecio = (valor) => valor.toLocaleString("es-CO");
 
   const mostrarProducto = () => {
     alert(`Seleccionaste ${nombre}`);
@@ -10,18 +11,15 @@ function ProductoCard({ producto }) {
     <article className="producto-card">
       <h2>{nombre}</h2>
       <p>Categoría: {categoria}</p>
-      <p>Precio: ${precio}</p>
-      <p>Stock: {stock}</p>
+      <p>Precio: ${formatearPrecio(precio)}</p>
+      <p>Stock: {stock}</p> 
       <strong>{estado}</strong>
       <br />
-      <button 
-        onClick={mostrarProducto} 
-        disabled={stock === 0}
-      >
+      <button onClick={mostrarProducto} disabled={stock === 0}>
         {stock > 0 ? "Ver producto" : "Agotado"}
       </button>
     </article>
   );
 }
 
-export default ProductoCard;
+export default ProductCard;
