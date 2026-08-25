@@ -1,12 +1,12 @@
-/* console.log("JavaScript listo para practicar");*/
-/*function calcularTotal(precio, cantidad) {
+/* console.log("JavaScript listo para practicar");
+function calcularTotal(precio, cantidad) {
     const total = precio * cantidad;
     return total;
 }
 const resultado = calcularTotal(50000, 3);
-console.log(resultado);*/
+console.log(resultado);
 
-/*function suma(a, b) {
+function suma(a, b) {
     const suma = a + b;
     return suma
 }
@@ -58,11 +58,11 @@ const cuadrado = (a,b) =>{
     const resultado = a ** b;
     return resultado
 };  
-console.log(cuadrado(8,2));*/
+console.log(cuadrado(8,2));
 
 
 
-/*
+
 const esMayorEdad = (a) =>{
     if (a >= 18){
         return("Mayor de edad");
@@ -90,16 +90,17 @@ const productos = [
     { id: 8, nombre: 'Silla', precio: 10000, categoria: 'Muebles', stock: 0 },
     { id: 9, nombre: 'Ventilador', precio: 20000, categoria: 'Electrodomesticos', stock: 5 },
     { id: 10, nombre: 'Camara', precio: 120000, categoria: 'Perifericos', stock: 1 },
-];*/
+];
 
 /*
 productos.forEach((producto, indice) => {
  console.log(`${indice + 1}. ${producto.nombre} -stock:${producto.stock}`);
 });
-
+*/
+/*
 const nombres = productos.map(producto => producto.nombre);
 console.log(nombres);
-
+/*
 const preciosConIva = productos.map(producto => producto.precio * 1.19);
 console.log(preciosConIva);
 
@@ -125,7 +126,7 @@ console.log(producto5);
 
 const buscarProducto = (id) => productos.find(producto => producto.id === id);
 
-console.log(buscarProducto(5));
+console.log(buscarProducto(5));/*
 
 const hayAgotados = productos.some(producto => producto.stock === 0);
 const preciosValidos = productos.every(producto => producto.precio > 0);
@@ -157,9 +158,10 @@ const { nombre, precio, stock } = productos[0];
 console.log(nombre, precio, stock);
 
 const productoActualizado = {
- ...productos[0],
- stock: 8
+  ...productos[0],
+  stock: 8
 };
+
 
 const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
 console.log(estado);
@@ -170,8 +172,9 @@ const productoEditado = {
   stock: 0
 };
 const { nombre, precio, stock } = productoEditado;
-const estado = stock > 0 ? 'Disponible' : 'Agotado';
-console.log(`El producto ${nombre} ahora cuesta $${precio} y su estado es: ${estado}.`);*/
+
+const estadoEditado = stock > 0 ? 'Disponible' : 'Agotado';
+console.log(`El producto ${nombre} ahora cuesta $${precio} y su estado es: ${estadoEditado}.`);*/
 
 
 
