@@ -3,18 +3,38 @@
  margin: 0 auto;
  padding: 24px;
  font-family: Arial, sans-serif;
+ color: rgb(238, 236, 227);
 }
 .productos {
  display: grid;
  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
  gap: 16px;
+
 }
 .producto-card {
- border: 1px solid #ddd;
+ border: 1px solid #0418ca;
  border-radius: 10px;
  padding: 16px;
- background: white;
+ background: rgb(114, 121, 197);
 }
 h2{
-    color: black;
+    color: rgb(255, 255, 255);
+}
+body{
+    background-color: rgba(0, 85, 255, 0.282);
+}
+input{
+    background-color: snow;
+    height: 30px;
+    border-radius: 10px;
+    border: solid rgb(114, 121, 197) 4px;
+    margin-left: 7px;
+}
+
+button{
+    background-color: rgb(14, 9, 80);
+    height: 30px;
+    border-radius: 10px;
+    border: solid rgb(114, 121, 197) 4px;
+    margin-left: 7px;
 }
