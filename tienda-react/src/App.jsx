@@ -26,11 +26,16 @@ const eliminarProducto = (id) => {
     return coincideNombre && coincideCategoria && coincideStock;
   });
 
-  const productosAgotados = productos.reduce(
-    (total, producto) => (producto.stock === 0 ? total + 1 : total),
-    0
-  );
+const totalRegistrados = productos.length;
 
+  const productosAgotados = productos.filter(
+    (producto) => producto.stock === 0
+  ).length;
+
+  const valorInventario = productos.reduce( 
+    (total, producto) => total + (producto.precio * producto.stock), 
+    0 
+);
   const limpiarFiltros = () => {
     setBusqueda("");
     setCategoria("Todas");
@@ -93,7 +98,22 @@ onAgregar={agregarProducto}
 
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
       </div>
+    <div className="tablero">
+      <div className="tarjeta-indicador">
+        <h4>Productos registrados</h4>
+        <p>{totalRegistrados}</p>
+      </div>
 
+      <div className="tarjeta-indicador">
+        <h4>Productos agotados</h4>
+        <p>{productosAgotados}</p>
+      </div>
+
+      <div className="tarjeta-indicador">
+        <h4>Valor del inventario</h4>
+        <p>${valorInventario.toLocaleString("es-CO")}</p>
+      </div>
+    </div>
       {}
       <p>Productos encontrados: {productosFiltrados.length}</p>
       <p>Productos agotados en tienda: {productosAgotados}</p>

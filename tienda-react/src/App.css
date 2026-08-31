@@ -18,3 +18,31 @@
 h2{
     color: black;
 }
+.tablero {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.tarjeta-indicador {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.tarjeta-indicador h4 {
+  margin: 0;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.tarjeta-indicador p {
+  margin: 10px 0 0 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0056b3;
+}
