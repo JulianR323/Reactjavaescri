@@ -32,6 +32,12 @@ function App() {
     setCategoria("Todas");
     setSoloDisponibles(false);
   };
+  const agregarProducto = (nuevoProducto) => {
+setProductos([
+...productos,
+nuevoProducto
+]);
+};
 
   return (
     <main className="contenedor">
@@ -45,7 +51,9 @@ function App() {
           value={busqueda}
           onChange={(evento) => setBusqueda(evento.target.value)}
         />
-<FormularioProducto />
+<FormularioProducto
+onAgregar={agregarProducto}
+/>
         <select
           value={categoria}
           onChange={(evento) => setCategoria(evento.target.value)}
