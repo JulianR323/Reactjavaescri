@@ -42,7 +42,18 @@ setProductos([
 nuevoProducto
 ]);
 };
-
+const modificarStock = (id, cambio) => { 
+    const nuevosProductos = productos.map(producto => { 
+      if (producto.id === id) { 
+        return { 
+          ...producto, 
+          stock: Math.max(0, producto.stock + cambio) 
+        }; 
+      } 
+      return producto; 
+    }); 
+    setProductos(nuevosProductos); 
+  };
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
@@ -97,6 +108,7 @@ onAgregar={agregarProducto}
       key={producto.id} 
       producto={producto} 
       onEliminar={eliminarProducto}
+      modificarStock={modificarStock}
     />
   ))}
 </section>
