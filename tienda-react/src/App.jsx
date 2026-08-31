@@ -26,11 +26,16 @@ const eliminarProducto = (id) => {
     return coincideNombre && coincideCategoria && coincideStock;
   });
 
-  const productosAgotados = productos.reduce(
-    (total, producto) => (producto.stock === 0 ? total + 1 : total),
-    0
-  );
+const totalRegistrados = productos.length;
 
+  const productosAgotados = productos.filter(
+    (producto) => producto.stock === 0
+  ).length;
+
+  const valorInventario = productos.reduce( 
+    (total, producto) => total + (producto.precio * producto.stock), 
+    0 
+);
   const limpiarFiltros = () => {
     setBusqueda("");
     setCategoria("Todas");
@@ -42,7 +47,18 @@ setProductos([
 nuevoProducto
 ]);
 };
-
+const modificarStock = (id, cambio) => { 
+    const nuevosProductos = productos.map(producto => { 
+      if (producto.id === id) { 
+        return { 
+          ...producto, 
+          stock: Math.max(0, producto.stock + cambio) 
+        }; 
+      } 
+      return producto; 
+    }); 
+    setProductos(nuevosProductos); 
+  };
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
@@ -82,7 +98,22 @@ onAgregar={agregarProducto}
 
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
       </div>
+    <div className="tablero">
+      <div className="tarjeta-indicador">
+        <h4>Productos registrados</h4>
+        <p>{totalRegistrados}</p>
+      </div>
 
+      <div className="tarjeta-indicador">
+        <h4>Productos agotados</h4>
+        <p>{productosAgotados}</p>
+      </div>
+
+      <div className="tarjeta-indicador">
+        <h4>Valor del inventario</h4>
+        <p>${valorInventario.toLocaleString("es-CO")}</p>
+      </div>
+    </div>
       {}
       <p>Productos encontrados: {productosFiltrados.length}</p>
       <p>Productos agotados en tienda: {productosAgotados}</p>
@@ -97,6 +128,7 @@ onAgregar={agregarProducto}
       key={producto.id} 
       producto={producto} 
       onEliminar={eliminarProducto}
+      modificarStock={modificarStock}
     />
   ))}
 </section>
