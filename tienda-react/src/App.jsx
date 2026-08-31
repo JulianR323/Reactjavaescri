@@ -2,8 +2,11 @@ import { useState } from "react";
 import ProductoCard from "./components/ProductCard";
 import { productos } from "./data/productos";
 import "./App.css";
+import { useState } from "react";
+import { productos as productosIniciales } from "./data/productos";
 
 function App() {
+  const [productos, setProductos] = useState(productosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
