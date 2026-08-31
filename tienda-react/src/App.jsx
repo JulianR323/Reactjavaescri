@@ -10,6 +10,10 @@ function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
+const eliminarProducto = (id) => {
+    const nuevaLista = productos.filter((producto) => producto.id !== id);
+    setProductos(nuevaLista);
+  };
 
   const productosFiltrados = productos.filter((producto) => {
     const coincideNombre = producto.nombre
@@ -80,13 +84,19 @@ function App() {
         <p>No se encontraron productos.</p>
       ) : (
         <section className="productos">
-          {productosFiltrados.map((producto) => (
-            <ProductoCard key={producto.id} producto={producto} />
-          ))}
-        </section>
+  {productosFiltrados.map((producto) => (
+    <ProductoCard 
+      key={producto.id} 
+      producto={producto} 
+      onEliminar={eliminarProducto}
+    />
+  ))}
+</section>
       )}
     </main>
   );
 }
 
 export default App;
+
+// Usamos filter() porque devuelve un nuevo arreglo excluyendo el elemento a eliminar, mientras que find() solo devuelve el primer elemento que coincide.
