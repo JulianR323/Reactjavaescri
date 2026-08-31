@@ -2,8 +2,8 @@ import { useState } from "react";
 import ProductoCard from "./components/ProductCard";
 import { productos } from "./data/productos";
 import "./App.css";
-import { useState } from "react";
 import { productos as productosIniciales } from "./data/productos";
+import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
   const [productos, setProductos] = useState(productosIniciales);
@@ -45,7 +45,7 @@ function App() {
           value={busqueda}
           onChange={(evento) => setBusqueda(evento.target.value)}
         />
-
+<FormularioProducto />
         <select
           value={categoria}
           onChange={(evento) => setCategoria(evento.target.value)}
