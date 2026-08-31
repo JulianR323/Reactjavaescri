@@ -36,6 +36,12 @@ const eliminarProducto = (id) => {
     setCategoria("Todas");
     setSoloDisponibles(false);
   };
+  const agregarProducto = (nuevoProducto) => {
+setProductos([
+...productos,
+nuevoProducto
+]);
+};
 
   return (
     <main className="contenedor">
@@ -49,7 +55,9 @@ const eliminarProducto = (id) => {
           value={busqueda}
           onChange={(evento) => setBusqueda(evento.target.value)}
         />
-<FormularioProducto />
+<FormularioProducto
+onAgregar={agregarProducto}
+/>
         <select
           value={categoria}
           onChange={(evento) => setCategoria(evento.target.value)}
