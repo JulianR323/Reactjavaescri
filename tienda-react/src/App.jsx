@@ -1,24 +1,18 @@
 import { useState, useEffect } from "react"; 
 import ProductoCard from "./components/ProductCard";
-<<<<<<< HEAD
-=======
 import "./App.css";
 >>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
 import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
-
-<<<<<<< HEAD
 const obtenerProductosIniciales = () => {
   const guardados = localStorage.getItem("inventario");
-=======
 function App() {
   const obtenerProductosIniciales = () => {
 
   const guardados =
     localStorage.getItem("inventario");
 
->>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
   if (guardados) {
     return JSON.parse(guardados);
   }
@@ -30,16 +24,12 @@ function App() {
   const [productoEditando, setProductoEditando] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
-<<<<<<< HEAD
   const [soloDisponibles, setSoloDisponibles] = useState(false);
   
 
   const [mensaje, setMensaje] = useState("");
-
-=======
   const [estado, setEstado] = useState("Todos");
   const [orden, setOrden] = useState("nombre");
->>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
   useEffect(() => {
     localStorage.setItem("inventario", JSON.stringify(productos));
   }, [productos]);
@@ -60,7 +50,7 @@ function App() {
       prod.id === productoActualizado.id ? productoActualizado : prod
     );
     setProductos(nuevaLista);
-    setProductoEditando(null); // Sale del modo edición
+    setProductoEditando(null); 
     setMensaje("Producto actualizado correctamente.");
   };
 
@@ -134,7 +124,6 @@ const productosOrdenados = [...productosFiltrados].sort((a, b) => {
   const valorInventario = productos.reduce( 
     (total, producto) => total + (producto.precio * producto.stock), 
     0 
-<<<<<<< HEAD
   );
 
   return (
@@ -155,8 +144,6 @@ const productosOrdenados = [...productosFiltrados].sort((a, b) => {
         productoEditando={productoEditando}
         setProductoEditando={setProductoEditando}
       />
-
-=======
 );
 const limpiarFiltros = () => {
   setBusqueda("");
@@ -185,7 +172,6 @@ const modificarStock = (id, cambio) => {
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
->>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       <div className="filtros">
         <input
           type="text"
@@ -246,10 +232,9 @@ const modificarStock = (id, cambio) => {
         </div>
       </div>
 
-<<<<<<< HEAD
+
       <p>Productos encontrados: {productosFiltrados.length}</p>
 
-=======
       <div className="tarjeta-indicador">
         <h4>Productos agotados</h4>
         <p>{productosAgotados}</p>
@@ -261,23 +246,20 @@ const modificarStock = (id, cambio) => {
       </div>
     </div>
       <p>Productos encontrados: {productosFiltrados.length}</p>
->>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       {productosFiltrados.length === 0 ? (
         <p>No se encontraron productos.</p>
       ) : (
         <section className="productos">
-<<<<<<< HEAD
           {productosFiltrados.map((producto) => (
             <ProductoCard 
               key={producto.id} 
               producto={producto} 
               onEliminar={eliminarProducto}
               modificarStock={modificarStock}
-              onEditar={(prod) => setProductoEditando(prod)} // Misión 4: Pasa la función de editar
+              onEditar={(prod) => setProductoEditando(prod)} 
             />
           ))}
         </section>
-=======
   {productosOrdenados.map((producto) => (
     <ProductoCard 
       key={producto.id} 
@@ -287,7 +269,6 @@ const modificarStock = (id, cambio) => {
     />
   ))}
 </section>
->>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       )}
     </main>
   );
