@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";  
 import ProductoCard from "./components/ProductCard";
 import { productos } from "./data/productos";
 import "./App.css";
@@ -10,6 +10,14 @@ function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
+  useEffect(() => {
+
+  localStorage.setItem(
+    "inventario",
+    JSON.stringify(productos)
+  );
+
+}, [productos]);
 const eliminarProducto = (id) => {
     const nuevaLista = productos.filter((producto) => producto.id !== id);
     setProductos(nuevaLista);
