@@ -6,7 +6,19 @@ import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
-  const [productos, setProductos] = useState(productosIniciales);
+  const obtenerProductosIniciales = () => {
+
+  const guardados =
+    localStorage.getItem("inventario");
+
+  if (guardados) {
+    return JSON.parse(guardados);
+  }
+
+  return productosIniciales;
+};
+const [productos, setProductos] =
+  useState(obtenerProductosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
