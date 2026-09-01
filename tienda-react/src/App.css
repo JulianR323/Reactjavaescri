@@ -29,6 +29,7 @@ input{
     border-radius: 10px;
     border: solid rgb(114, 121, 197) 4px;
     margin-left: 7px;
+    color: black;
 }
 .tablero {
   display: flex;
