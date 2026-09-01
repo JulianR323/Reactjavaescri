@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";  
 import ProductoCard from "./components/ProductCard";
-import { productos } from "./data/productos";
 import "./App.css";
 import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
-  const [productoEditando, setProductoEditando] = useState(null);
   const obtenerProductosIniciales = () => {
 
   const guardados =
@@ -22,7 +20,8 @@ const [productos, setProductos] =
   useState(obtenerProductosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
-  const [soloDisponibles, setSoloDisponibles] = useState(false);
+  const [estado, setEstado] = useState("Todos");
+  const [orden, setOrden] = useState("nombre");
   useEffect(() => {
 
   localStorage.setItem(
@@ -36,16 +35,45 @@ const eliminarProducto = (id) => {
     setProductos(nuevaLista);
   };
 
-  const productosFiltrados = productos.filter((producto) => {
-    const coincideNombre = producto.nombre
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    const coincideCategoria =
-      categoria === "Todas" || producto.categoria === categoria;
-    const coincideStock = !soloDisponibles || producto.stock > 0;
+const productosFiltrados = productos.filter((producto) => {
+  const coincideNombre = producto.nombre
+    .toLowerCase()
+    .includes(busqueda.toLowerCase());
 
-    return coincideNombre && coincideCategoria && coincideStock;
-  });
+  const coincideCategoria =
+    categoria === "Todas" || producto.categoria === categoria;
+
+  const coincideEstado =
+    estado === "Todos" ||
+    (estado === "Disponibles" && producto.stock > 0) ||
+    (estado === "Agotados" && producto.stock === 0);
+
+  return coincideNombre && coincideCategoria && coincideEstado;
+});
+const productosOrdenados = [...productosFiltrados].sort((a, b) => {
+  if (orden === "nombre") {
+    return a.nombre.localeCompare(b.nombre);
+  }
+
+  if (orden === "precioMenor") {
+    return a.precio - b.precio;
+  }
+
+  if (orden === "precioMayor") {
+    return b.precio - a.precio;
+  }
+
+  if (orden === "stockMenor") {
+    return a.stock - b.stock;
+  }
+
+  if (orden === "stockMayor") {
+    return b.stock - a.stock;
+  }
+
+  return 0;
+});
+
 
 const totalRegistrados = productos.length;
 
@@ -57,11 +85,12 @@ const totalRegistrados = productos.length;
     (total, producto) => total + (producto.precio * producto.stock), 
     0 
 );
-  const limpiarFiltros = () => {
-    setBusqueda("");
-    setCategoria("Todas");
-    setSoloDisponibles(false);
-  };
+const limpiarFiltros = () => {
+  setBusqueda("");
+  setCategoria("Todas");
+  setEstado("Todos");
+  setOrden("nombre");
+};
   const agregarProducto = (nuevoProducto) => {
 setProductos([
 ...productos,
@@ -83,8 +112,6 @@ const modificarStock = (id, cambio) => {
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
-
-      {}
       <div className="filtros">
         <input
           type="text"
@@ -108,14 +135,24 @@ onAgregar={agregarProducto}
           <option value="Almacenamiento">Almacenamiento</option>
         </select>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={soloDisponibles}
-            onChange={(evento) => setSoloDisponibles(evento.target.checked)}
-          />
-          Mostrar únicamente disponibles
-        </label>
+<select
+  value={estado}
+  onChange={(evento) => setEstado(evento.target.value)}
+>
+  <option value="Todos">Todos</option>
+  <option value="Disponibles">Disponibles</option>
+  <option value="Agotados">Agotados</option>
+</select>
+<select
+  value={orden}
+  onChange={(evento) => setOrden(evento.target.value)}
+>
+  <option value="nombre">Nombre A-Z</option>
+  <option value="precioMenor">Precio menor a mayor</option>
+  <option value="precioMayor">Precio mayor a menor</option>
+  <option value="stockMenor">Stock menor a mayor</option>
+  <option value="stockMayor">Stock mayor a menor</option>
+</select>
 
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
       </div>
@@ -135,16 +172,12 @@ onAgregar={agregarProducto}
         <p>${valorInventario.toLocaleString("es-CO")}</p>
       </div>
     </div>
-      {}
       <p>Productos encontrados: {productosFiltrados.length}</p>
-      <p>Productos agotados en tienda: {productosAgotados}</p>
-
-      {}
       {productosFiltrados.length === 0 ? (
         <p>No se encontraron productos.</p>
       ) : (
         <section className="productos">
-  {productosFiltrados.map((producto) => (
+  {productosOrdenados.map((producto) => (
     <ProductoCard 
       key={producto.id} 
       producto={producto} 
