@@ -6,6 +6,7 @@ import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
+  const [productoEditando, setProductoEditando] = useState(null);
   const [productos, setProductos] = useState(productosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
