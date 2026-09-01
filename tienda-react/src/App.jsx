@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";  
 import ProductoCard from "./components/ProductCard";
 import { productos } from "./data/productos";
 import "./App.css";
@@ -6,11 +6,35 @@ import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
+<<<<<<< HEAD
   const [productoEditando, setProductoEditando] = useState(null);
   const [productos, setProductos] = useState(productosIniciales);
+=======
+  const obtenerProductosIniciales = () => {
+
+  const guardados =
+    localStorage.getItem("inventario");
+
+  if (guardados) {
+    return JSON.parse(guardados);
+  }
+
+  return productosIniciales;
+};
+const [productos, setProductos] =
+  useState(obtenerProductosIniciales);
+>>>>>>> b4f351f33d18c9c422ec33ea788b3ead3c1d21c8
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
+  useEffect(() => {
+
+  localStorage.setItem(
+    "inventario",
+    JSON.stringify(productos)
+  );
+
+}, [productos]);
 const eliminarProducto = (id) => {
     const nuevaLista = productos.filter((producto) => producto.id !== id);
     setProductos(nuevaLista);
