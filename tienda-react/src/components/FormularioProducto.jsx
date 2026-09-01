@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function FormularioProducto({ onAgregar }) {
+function FormularioProducto({ onAgregar, productoEditando }) {
   const [formulario, setFormulario] = useState({
     nombre: "",
     categoria: "",
     precio: "",
     stock: ""
   });
+
+  useEffect(() => {
+    if (productoEditando) {
+      setFormulario({
+        nombre: productoEditando.nombre,
+        categoria: productoEditando.categoria,
+        precio: productoEditando.precio,
+        stock: productoEditando.stock
+      });
+    }
+  }, [productoEditando]);
 
   const manejarCambio = (evento) => {
     setFormulario({
@@ -49,7 +60,11 @@ function FormularioProducto({ onAgregar }) {
 
   return (
     <form onSubmit={manejarEnvio}>
-      <h2>Agregar producto</h2>
+      <h2>
+        {productoEditando
+          ? "Editar producto"
+          : "Agregar producto"}
+      </h2>
       <input
         type="text"
         name="nombre"
