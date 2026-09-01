@@ -16,7 +16,6 @@ function App() {
     "inventario",
     JSON.stringify(productos)
   );
-
 }, [productos]);
 const eliminarProducto = (id) => {
     const nuevaLista = productos.filter((producto) => producto.id !== id);
