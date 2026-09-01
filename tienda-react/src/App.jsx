@@ -1,11 +1,24 @@
 import { useState, useEffect } from "react"; 
 import ProductoCard from "./components/ProductCard";
+<<<<<<< HEAD
+=======
+import "./App.css";
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
 import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
 
+<<<<<<< HEAD
 const obtenerProductosIniciales = () => {
   const guardados = localStorage.getItem("inventario");
+=======
+function App() {
+  const obtenerProductosIniciales = () => {
+
+  const guardados =
+    localStorage.getItem("inventario");
+
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
   if (guardados) {
     return JSON.parse(guardados);
   }
@@ -17,11 +30,16 @@ function App() {
   const [productoEditando, setProductoEditando] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
+<<<<<<< HEAD
   const [soloDisponibles, setSoloDisponibles] = useState(false);
   
 
   const [mensaje, setMensaje] = useState("");
 
+=======
+  const [estado, setEstado] = useState("Todos");
+  const [orden, setOrden] = useState("nombre");
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
   useEffect(() => {
     localStorage.setItem("inventario", JSON.stringify(productos));
   }, [productos]);
@@ -71,22 +89,52 @@ function App() {
     setMensaje("Filtros restablecidos.");
   };
 
-  const productosFiltrados = productos.filter((producto) => {
-    const coincideNombre = producto.nombre
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    const coincideCategoria =
-      categoria === "Todas" || producto.categoria === categoria;
-    const coincideStock = !soloDisponibles || producto.stock > 0;
+const productosFiltrados = productos.filter((producto) => {
+  const coincideNombre = producto.nombre
+    .toLowerCase()
+    .includes(busqueda.toLowerCase());
 
-    return coincideNombre && coincideCategoria && coincideStock;
-  });
+  const coincideCategoria =
+    categoria === "Todas" || producto.categoria === categoria;
+
+  const coincideEstado =
+    estado === "Todos" ||
+    (estado === "Disponibles" && producto.stock > 0) ||
+    (estado === "Agotados" && producto.stock === 0);
+
+  return coincideNombre && coincideCategoria && coincideEstado;
+});
+const productosOrdenados = [...productosFiltrados].sort((a, b) => {
+  if (orden === "nombre") {
+    return a.nombre.localeCompare(b.nombre);
+  }
+
+  if (orden === "precioMenor") {
+    return a.precio - b.precio;
+  }
+
+  if (orden === "precioMayor") {
+    return b.precio - a.precio;
+  }
+
+  if (orden === "stockMenor") {
+    return a.stock - b.stock;
+  }
+
+  if (orden === "stockMayor") {
+    return b.stock - a.stock;
+  }
+
+  return 0;
+});
+
 
   const totalRegistrados = productos.length;
   const productosAgotados = productos.filter((producto) => producto.stock === 0).length;
   const valorInventario = productos.reduce( 
     (total, producto) => total + (producto.precio * producto.stock), 
     0 
+<<<<<<< HEAD
   );
 
   return (
@@ -108,6 +156,36 @@ function App() {
         setProductoEditando={setProductoEditando}
       />
 
+=======
+);
+const limpiarFiltros = () => {
+  setBusqueda("");
+  setCategoria("Todas");
+  setEstado("Todos");
+  setOrden("nombre");
+};
+  const agregarProducto = (nuevoProducto) => {
+setProductos([
+...productos,
+nuevoProducto
+]);
+};
+const modificarStock = (id, cambio) => { 
+    const nuevosProductos = productos.map(producto => { 
+      if (producto.id === id) { 
+        return { 
+          ...producto, 
+          stock: Math.max(0, producto.stock + cambio) 
+        }; 
+      } 
+      return producto; 
+    }); 
+    setProductos(nuevosProductos); 
+  };
+  return (
+    <main className="contenedor">
+      <h1>Tienda tecnológica</h1>
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       <div className="filtros">
         <input
           type="text"
@@ -129,14 +207,24 @@ function App() {
           <option value="Almacenamiento">Almacenamiento</option>
         </select>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={soloDisponibles}
-            onChange={(evento) => setSoloDisponibles(evento.target.checked)}
-          />
-          Mostrar únicamente disponibles
-        </label>
+<select
+  value={estado}
+  onChange={(evento) => setEstado(evento.target.value)}
+>
+  <option value="Todos">Todos</option>
+  <option value="Disponibles">Disponibles</option>
+  <option value="Agotados">Agotados</option>
+</select>
+<select
+  value={orden}
+  onChange={(evento) => setOrden(evento.target.value)}
+>
+  <option value="nombre">Nombre A-Z</option>
+  <option value="precioMenor">Precio menor a mayor</option>
+  <option value="precioMayor">Precio mayor a menor</option>
+  <option value="stockMenor">Stock menor a mayor</option>
+  <option value="stockMayor">Stock mayor a menor</option>
+</select>
 
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
       </div>
@@ -158,12 +246,27 @@ function App() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <p>Productos encontrados: {productosFiltrados.length}</p>
 
+=======
+      <div className="tarjeta-indicador">
+        <h4>Productos agotados</h4>
+        <p>{productosAgotados}</p>
+      </div>
+
+      <div className="tarjeta-indicador">
+        <h4>Valor del inventario</h4>
+        <p>${valorInventario.toLocaleString("es-CO")}</p>
+      </div>
+    </div>
+      <p>Productos encontrados: {productosFiltrados.length}</p>
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       {productosFiltrados.length === 0 ? (
         <p>No se encontraron productos.</p>
       ) : (
         <section className="productos">
+<<<<<<< HEAD
           {productosFiltrados.map((producto) => (
             <ProductoCard 
               key={producto.id} 
@@ -174,6 +277,17 @@ function App() {
             />
           ))}
         </section>
+=======
+  {productosOrdenados.map((producto) => (
+    <ProductoCard 
+      key={producto.id} 
+      producto={producto} 
+      onEliminar={eliminarProducto}
+      modificarStock={modificarStock}
+    />
+  ))}
+</section>
+>>>>>>> f88ae42c8a3387563272c30ae58c8d6f429f983c
       )}
     </main>
   );
