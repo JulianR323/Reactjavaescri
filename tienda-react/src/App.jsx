@@ -6,10 +6,7 @@ import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 
 function App() {
-<<<<<<< HEAD
   const [productoEditando, setProductoEditando] = useState(null);
-  const [productos, setProductos] = useState(productosIniciales);
-=======
   const obtenerProductosIniciales = () => {
 
   const guardados =
@@ -23,7 +20,6 @@ function App() {
 };
 const [productos, setProductos] =
   useState(obtenerProductosIniciales);
->>>>>>> b4f351f33d18c9c422ec33ea788b3ead3c1d21c8
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
