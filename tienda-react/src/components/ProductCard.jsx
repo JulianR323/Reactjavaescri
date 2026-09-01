@@ -1,4 +1,4 @@
-function ProductCard({ producto, onEliminar, modificarStock }) {
+function ProductCard({ producto, onEliminar, modificarStock, onEditar}) {
   const { id, nombre, precio, categoria, stock } = producto;
   const estado = stock > 0 ? "Disponible" : "Agotado";
   const formatearPrecio = (valor) => valor.toLocaleString("es-CO");
@@ -24,6 +24,9 @@ function ProductCard({ producto, onEliminar, modificarStock }) {
       </button>
       <button onClick={() => onEliminar(id)}>
         Eliminar
+      </button>
+      <button onClick={() => onEditar(producto)}>
+        Editar
       </button>
     </article>
   );
