@@ -23,7 +23,7 @@ function Acerca() {
           Esta aplicación de gestión de inventario ha sido diseñada para optimizar el control de productos, stock y administración general con una interfaz moderna y eficiente.
         </p>
         <p style={{ color: "#3b82f6", fontSize: "14px", fontWeight: "bold" }}>
-          Versión 1.0 - Tema Azul Personalizado
+         
         </p>
       </div>
     </div>
