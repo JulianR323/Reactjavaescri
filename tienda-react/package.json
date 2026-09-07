@@ -1,0 +1,11 @@
+{
+  "name": "tienda-react",
+  "version": "1.0.0",
+  "description": "La aplicación ahora permite:\r - Agregar productos\r - Validar formularios\r - Eliminar productos\r - Modificar stock\r - Calcular inventario dinámicamente\r - Gestionar estado con useState\r - persistencia con localStorage,useEffect(), edición, filtros y ordenamiento.",
+  "main": "vite.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs"
+}
