@@ -1,11 +1,9 @@
+ import { NavLink } from "react-router"; // Asegúrate de importar NavLink
+
 function ProductCard({ producto, onEliminar, modificarStock, onEditar }) {
   const { id, nombre, precio, categoria, stock } = producto;
   const estado = stock > 0 ? "Disponible" : "Agotado";
   const formatearPrecio = (valor) => valor.toLocaleString("es-CO");
-
-  const mostrarProducto = () => {
-    alert(`Seleccionaste ${nombre}`);
-  };
 
   return (
     <article className="producto-card">
@@ -29,9 +27,12 @@ function ProductCard({ producto, onEliminar, modificarStock, onEditar }) {
       <strong>{estado}</strong>
       <br />
       
-      <button onClick={mostrarProducto} disabled={stock === 0}>
-        {stock > 0 ? "Ver producto" : "Agotado"}
-      </button>
+      {/* Misión 5: Botón envuelto en NavLink para ir al detalle */}
+      <NavLink to={`/productos/${id}`}>
+        <button disabled={stock === 0}>
+          {stock > 0 ? "Ver producto" : "Agotado"}
+        </button>
+      </NavLink>
 
       <button onClick={() => onEliminar(id)}>
         Eliminar

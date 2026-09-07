@@ -1,4 +1,3 @@
-
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
@@ -7,6 +6,7 @@ import Inventario from "./pages/Inventario";
 import NuevoProducto from "./pages/NuevoProducto";
 import Acerca from "./pages/Acerca";
 import NoEncontrado from "./pages/NoEncontrado";
+import DetalleProducto from "./pages/DetalleProducto";
 import "./App.css";
 import { productos as productosIniciales } from "./data/productos";
 
@@ -81,7 +81,8 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Inicio />} />
+        {/* Ruta principal con estadísticas dinámicas */}
+        <Route path="/" element={<Inicio productos={productos} />} />
 
         <Route
           path="/inventario"
@@ -109,6 +110,14 @@ function App() {
         />
 
         <Route path="/acerca" element={<Acerca />} />
+        
+        {/* Ruta dinámica */}
+        <Route 
+          path="/productos/:id" 
+          element={<DetalleProducto productos={productos} />} 
+        />
+
+        {/* Ruta comodín para páginas no encontradas */}
         <Route path="*" element={<NoEncontrado />} />
       </Routes>
     </>
