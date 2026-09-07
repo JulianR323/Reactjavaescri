@@ -1,6 +1,12 @@
+  
 import { useState, useEffect } from "react";
 
-function FormularioProducto({ onAgregar, productoEditando }) {
+function FormularioProducto({
+  onAgregar,
+  onActualizar,
+  productoEditando,
+  setProductoEditando
+}) {
   const [formulario, setFormulario] = useState({
     nombre: "",
     categoria: "",
@@ -39,17 +45,21 @@ function FormularioProducto({ onAgregar, productoEditando }) {
       return;
     }
 
-    const nuevoProducto = {
-      id: Date.now(),
+    const producto = {
+      id: productoEditando ? productoEditando.id : Date.now(),
       nombre: formulario.nombre,
       categoria: formulario.categoria,
       precio: Number(formulario.precio),
       stock: Number(formulario.stock)
     };
 
-    onAgregar(nuevoProducto);
+    if (productoEditando) {
+      onActualizar(producto);
+      setProductoEditando(null);
+    } else {
+      onAgregar(producto);
+    }
 
-    // Opcional: limpiar los campos al enviar
     setFormulario({
       nombre: "",
       categoria: "",
@@ -65,6 +75,7 @@ function FormularioProducto({ onAgregar, productoEditando }) {
           ? "Editar producto"
           : "Agregar producto"}
       </h2>
+
       <input
         type="text"
         name="nombre"
@@ -72,6 +83,7 @@ function FormularioProducto({ onAgregar, productoEditando }) {
         value={formulario.nombre}
         onChange={manejarCambio}
       />
+
       <input
         type="text"
         name="categoria"
@@ -79,6 +91,7 @@ function FormularioProducto({ onAgregar, productoEditando }) {
         value={formulario.categoria}
         onChange={manejarCambio}
       />
+
       <input
         type="number"
         name="precio"
@@ -86,6 +99,7 @@ function FormularioProducto({ onAgregar, productoEditando }) {
         value={formulario.precio}
         onChange={manejarCambio}
       />
+
       <input
         type="number"
         name="stock"
@@ -93,9 +107,15 @@ function FormularioProducto({ onAgregar, productoEditando }) {
         value={formulario.stock}
         onChange={manejarCambio}
       />
-      <button type="submit">Agregar producto</button>
+
+      <button type="submit">
+        {productoEditando
+          ? "Guardar cambios"
+          : "Agregar producto"}
+      </button>
     </form>
   );
 }
 
 export default FormularioProducto;
+

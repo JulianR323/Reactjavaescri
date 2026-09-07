@@ -67,3 +67,29 @@ button{
     border: solid rgb(114, 121, 197) 4px;
     margin-left: 7px;
 }
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 18px;
+  background-color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  background-color: #334155;
+}
+
+.navbar a.active {
+  background-color: #2563eb;
+}
